@@ -22,11 +22,17 @@ public class ChangeScene : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if(collider.gameObject.tag == "Player")
+		if(collider.gameObject.tag == "Player" && gameObject.tag == "DungeonDoor")
+		{
+			
+			Debug.Log("Collided with dungeon door");
+
+			LoadNextLevel();
+		}
+		else if(collider.gameObject.tag == "Player")
 		{
 			LoadNextLevel();
 			Debug.Log("Triggered");
-			//SceneManager.LoadScene(sceneToLoad);
 		}
 	}
 	
