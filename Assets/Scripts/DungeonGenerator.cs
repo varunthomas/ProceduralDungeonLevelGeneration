@@ -15,6 +15,7 @@ public class DungeonGenerator : MonoBehaviour
     int gridSize;
     Room[,] rooms;
     char[] dirArray = new char[4];
+    int createdRooms = 0;
  
 
 	void Awake()
@@ -76,56 +77,128 @@ public class DungeonGenerator : MonoBehaviour
     Room generateFirstRoom()
     {
         List<float> random_neigh_list = new List<float>() {0.25f,0.5f,0.75f,1.0f}; //This list is for randomly selecting a direction
+        Queue<Room> roomsToCreate = new Queue<Room> ();
         float rand_val;
         int rand_dir_index = 0;
-
-        Room room = new Room(gridSize/2, gridSize/2);
+        int neighbour_index = 0;
+        int availableRooms;
+        Room room;
+        Room firstRoom = new Room(gridSize/2, gridSize/2);
+        //firstRoom.availableRooms = num_rooms-1;
+        availableRooms = firstRoom.availableRooms;
+        roomsToCreate.Enqueue(firstRoom);
+        num_rooms--;
         //middle = row_size or col_size /2
         //rooms[gridSize/2][gridSize/2] = room;
-        num_rooms--;
+        //num_rooms--;
 
-        int num_neighbours = Random.Range(1,5); //Select the number of neighbors for the room randomly
+        int num_neighbours = Mathf.Min(num_rooms, Random.Range(1,5)); //Select the number of neighbors for the room randomly
 
         //Assign direction by iterating through min of num_rooms and num_neighbours
-        for(int neighbour_index = 0; neighbour_index < Mathf.Min(num_rooms, num_neighbours); neighbour_index++)
+        //while( neighbour_index < Mathf.Min(num_rooms, num_neighbours) && roomsToCreate.Count > 0)
+        //num_rooms = 3, num_neighbors = 2
+        //while( num_rooms > 0 && neighbour_index < Mathf.Min(num_neighbours, availableRooms) && roomsToCreate.Count > 0)
+        while( num_rooms > 0)
         {
-            rand_val = Random.value; //0.0 to 1.0
-            foreach(float rand_neigh_index in random_neigh_list)
+            num_neighbours = Mathf.Min(num_rooms, Random.Range(1,5));
+            room = roomsToCreate.Dequeue();
+            createdRooms++;
+
+            //Select the neighbours randomly
+            for(int i = 0; i <num_neighbours; i++)
             {
-                if(rand_val <= rand_neigh_index)
+                rand_val = Random.value;
+                rand_dir_index = getDirection(rand_val, num_neighbours)-1;
+                AddNeighbour(rand_dir_index, room, roomsToCreate);
+                Debug.Log("rand idx " + rand_dir_index);
+
+            }
+
+            //rand_val = Random.value; //0.0 to 1.0
+            /*foreach(float rand_neigh_index in random_neigh_list)
+            {
+                if(rand_dir_index < random_neigh_list.Count && random_neigh_list[rand_dir_index] != 0f && rand_val <= rand_neigh_index)
                 {
-                    AddNeighbour(rand_dir_index, room);
+                    AddNeighbour(rand_dir_index, room, roomsToCreate);
                     Debug.Log("rand idx " + rand_dir_index);
-                    random_neigh_list.RemoveAt(rand_dir_index);
-                    break;
+                    random_neigh_list[rand_dir_index] = 0f;
+                    //break;
                 }
                 rand_dir_index++;
-            }
+            }*/
+            neighbour_index++;
+            //num_rooms--;
+
+            availableRooms = roomsToCreate.Peek().availableRooms;
+            
         }
         
         
-        return room;
+        return firstRoom;
     }
 
-    void AddNeighbour(int neigh_index, Room room)
+    void AddNeighbour(int neigh_index, Room room, Queue<Room> roomsToCreate)
     {
         char neighbour_dir = dirArray[neigh_index];
-        if(neighbour_dir == 'N')
+        Room neighRoom;
+       // if(createdRooms < num_rooms)
+        //{
+            neighRoom = new Room(1,2);
+            if(neighbour_dir == 'N')
+            {
+                room.NeighbourList[0] = true;//.Add('N');
+                neighRoom.NeighbourList[3] = true;//.Add('S');
+                neighRoom.availableRooms--;
+                //neighRoom = generateFirstRoom();
+            
+
+            }
+            else if(neighbour_dir == 'E')
+            {
+                room.NeighbourList[1] = true;//.Add('E');
+                neighRoom.NeighbourList[2] = true;//.Add('W');
+                neighRoom.availableRooms--;
+                //neighRoom = generateFirstRoom();
+            }
+            else if(neighbour_dir == 'W')
+            {
+                room.NeighbourList[2] = true;//.Add('W');
+                neighRoom.NeighbourList[1] = true;//.Add('E');
+                neighRoom.availableRooms--;
+                //neighRoom = generateFirstRoom();
+            }
+            else if(neighbour_dir == 'S')
+            {
+                room.NeighbourList[3] = true;//.Add('S');
+                neighRoom.NeighbourList[1] = true;//.Add('N');
+                neighRoom.availableRooms--;
+                //neighRoom = generateFirstRoom();
+            }
+            roomsToCreate.Enqueue(room);
+            num_rooms--;
+       // }
+    }
+
+    int getDirection(float rand_val, int num_neighbours)
+    {
+        float frac = 1f/(float)num_neighbours;
+        int id;
+        for(id = 1; id <= num_neighbours; id++)
         {
-            room.NeighbourList.Add('N');
+            Debug.Log(frac*(float)id);
+            if(rand_val < (float)frac*id)
+            {
+                Debug.Log("Returning " + id);
+                return id;
+            }
+            else 
+            {
+                Debug.Log("else part");
+                //id++;
+            }
         }
-        else if(neighbour_dir == 'E')
-        {
-            room.NeighbourList.Add('E');
-        }
-        else if(neighbour_dir == 'W')
-        {
-            room.NeighbourList.Add('W');
-        }
-        else if(neighbour_dir == 'S')
-        {
-            room.NeighbourList.Add('S');
-        }
+        Debug.Log("Should not happen" + rand_val + " " + num_neighbours + " " + frac + "id " + id);
+        return 0;
     }
     /*void GenerateDungeon()
     {
