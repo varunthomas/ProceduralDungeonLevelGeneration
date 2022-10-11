@@ -2505,6 +2505,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1995067137936645206}
     m_Modifications:
     - target: {fileID: 7479219492999109626, guid: b4c370d1c387f9249b09495f82118609, type: 3}
+      propertyPath: dir
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479219492999109626, guid: b4c370d1c387f9249b09495f82118609, type: 3}
       propertyPath: sceneToLoad
       value: Dungeon
       objectReference: {fileID: 0}

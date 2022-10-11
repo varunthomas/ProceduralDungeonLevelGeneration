@@ -368,7 +368,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 11
-      m_TileSpriteIndex: 7
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -378,7 +378,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -388,7 +388,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2297,26 +2297,26 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 484664933, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -55685622, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 8
-    m_Data: {fileID: -553057654, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -2067012856, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 2102113346, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 112
-    m_Data: {fileID: 326597476, guid: 878df76010ee7a34d8e96cdd729451b9, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 8
+    m_Data: {fileID: -553057654, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -55685622, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
+  - m_RefCount: 112
+    m_Data: {fileID: 326597476, guid: 878df76010ee7a34d8e96cdd729451b9, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -2067012856, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
   - m_RefCount: 20
     m_Data: {fileID: -1229013931, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1542177287, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
   - m_RefCount: 25
     m_Data: {fileID: 935869934, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 2102113346, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -379400395, guid: 8c7c810786185d148aa89f53f6d7d39d, type: 3}
   - m_RefCount: 19
@@ -2503,6 +2503,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2918789324892222012}
     m_Modifications:
+    - target: {fileID: 7479219492999109626, guid: b4c370d1c387f9249b09495f82118609, type: 3}
+      propertyPath: dir
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7479219492999109626, guid: b4c370d1c387f9249b09495f82118609, type: 3}
       propertyPath: sceneToLoad
       value: Dungeon

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Room
 {
-    int x_coord, y_coord;
-    public bool[] NeighbourList = new bool[4];
 
-    public int availableRooms;
-    public Room(int x, int y)
+    public int room_num;
+    public bool[] NeighbourList = new bool[4];
+    public Room[] NeighbourRoom = new Room[4];
+
+    public Room(int n)
     {
-        availableRooms = 4;
-        x_coord = x;
-        y_coord = y;
+        room_num = n;
     }
 
     public string getPrefabName()
@@ -38,5 +37,20 @@ public class Room
         
         return prefabName;
     }
+
+    public int getAvailableNeighCount()
+    {
+        int count = 0;
+        for(int i=0 ; i<4; i++)
+        {
+            if(NeighbourList[i] == false)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    
 
 }

@@ -1,38 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class ChangeScene : MonoBehaviour
 {
 	
 	public string sceneToLoad;
 	public Animator transition;
 	public float transitionTime = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public int dir;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
 	void OnTriggerEnter2D(Collider2D collider)
 	{
 		if(collider.gameObject.tag == "Player" && gameObject.tag == "DungeonDoor")
 		{
-			
-			Debug.Log("Collided with dungeon door");
+			GameObject dungeon = GameObject.FindGameObjectWithTag ("Dungeon");
+			DungeonGenerator dungeonGenerator = dungeon.GetComponent<DungeonGenerator> ();
+			Room room = dungeonGenerator.GetCurrentRoom();
+
+			dungeonGenerator.SetCurrentRoom(room.NeighbourRoom[dir]);
 
 			LoadNextLevel();
 		}
 		else if(collider.gameObject.tag == "Player")
 		{
 			LoadNextLevel();
-			Debug.Log("Triggered");
 		}
 	}
 	
