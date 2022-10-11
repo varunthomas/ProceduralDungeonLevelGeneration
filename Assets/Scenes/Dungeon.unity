@@ -280,6 +280,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridObject: {fileID: 381159415}
+  spriteArray:
+  - {fileID: 1235354474, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
+  - {fileID: -1486333798, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
+  - {fileID: 359206793, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
+  - {fileID: -364038666, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
 --- !u!1001 &1259699004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,6 +292,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 222479883672773440, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 222479883672773442, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_Name
       value: Player
@@ -297,11 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222479883672773500, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222479883672773500, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222479883672773500, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_LocalPosition.z
@@ -336,6 +345,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222479883672773501, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1235354474, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
+    - target: {fileID: 222479883672773501, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
@@ -343,6 +356,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1606893625}
+    - target: {fileID: 222479883672773503, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1958475803}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
 --- !u!4 &1259699005 stripped
@@ -466,6 +483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &1958475803 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 222479883672773501, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
+  m_PrefabInstance: {fileID: 1259699004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2096580245
 GameObject:
   m_ObjectHideFlags: 0

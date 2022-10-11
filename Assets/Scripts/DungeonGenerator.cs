@@ -22,10 +22,15 @@ public class DungeonGenerator : MonoBehaviour
             instance = this;
 
             currentRoom = generateFirstRoom();
+            Debug.Log("Awake1");
             
         }
         else
         {
+            Debug.Log("Awake2");
+            int entryPoint;
+            entryPoint = instance.currentRoom.GetEntryPoint();
+            instance.currentRoom.SetPlayerPos(entryPoint);
             //instance.currentRoom is called, otherwise currentRoom will be null here. Everytime we use member variables in else case, ie when instance is set, we need to access it through that instance
             prefabName = instance.currentRoom.getPrefabName();
             GameObject roomObject = (GameObject) Instantiate (Resources.Load (prefabName));
@@ -39,6 +44,7 @@ public class DungeonGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start func");
         prefabName = currentRoom.getPrefabName();
         GameObject roomObject = (GameObject) Instantiate (Resources.Load (prefabName));
         roomObject.transform.SetParent(gridObject.transform);
@@ -72,7 +78,13 @@ public class DungeonGenerator : MonoBehaviour
                 AddNeighbour(rand_dir_index, room, roomsToCreate);
 
             }
+            Debug.Log(room.getPrefabName() + " count is " + room.room_num);
+            for(int i=0;i<4;i++)
+            {
+                Debug.Log("Neigh " + room.NeighbourList[i] + " id " + i);
+            }
         }
+        
         
         
         return firstRoom;
@@ -144,4 +156,5 @@ public class DungeonGenerator : MonoBehaviour
     {
         currentRoom = room;
     }
+
 }

@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 movement;
 	public Joystick joystick;
 
+	int dir;
+
+	void Start()
+	{
+		dir = GetDirection();
+	}
     // Update is called once per frame
     void Update()
     {
@@ -43,11 +49,22 @@ public class PlayerMovement : MonoBehaviour
 		animator.SetFloat("Horizontal", movement.x);
 		animator.SetFloat("Vertical", movement.y);
 		animator.SetFloat("Speed", movement.sqrMagnitude);
+		animator.SetInteger("Direction", dir);
 
     }
 	
 	void FixedUpdate()
 	{
 		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+	}
+
+	public void SetDirection(int d)
+	{
+		dir = d;
+	}
+
+	public int GetDirection()
+	{
+		return dir;
 	}
 }

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+using UnityEngine;
 public class Room
 {
 
     public int room_num;
+    int entryPoint;
     public bool[] NeighbourList = new bool[4];
     public Room[] NeighbourRoom = new Room[4];
 
@@ -51,6 +50,57 @@ public class Room
         return count;
     }
 
-    
+    public void SetEntryPoint(int dir)
+    {
+        if(dir == 0)
+        {
+            entryPoint = 3;
+        }
+        else if(dir == 1)
+        {
+            entryPoint = 2;
+        }
+        else if(dir == 2)
+        {
+            entryPoint = 1;
+        }
+        else if(dir == 3)
+        {
+            entryPoint = 0;
+        }
+        Debug.Log("Entry point " + entryPoint);
+    }
 
+    public int GetEntryPoint()
+    {
+        return entryPoint;
+    }
+
+    public void SetPlayerPos(int entryPoint)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag ("Player");
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement> ();
+        
+
+        if(entryPoint == 0)
+        {
+            player.transform.position = new Vector2(0.59f, 3.0f);
+            playerMovement.SetDirection(0);
+        }
+        else if(entryPoint == 1)
+        {
+            player.transform.position = new Vector2(9.1f, 0.48f);
+            playerMovement.SetDirection(1);
+        }
+        else if(entryPoint == 2)
+        {
+            player.transform.position = new Vector2(-9.3f, 0.48f);
+            playerMovement.SetDirection(2);
+        }
+        else if(entryPoint == 3)
+        {
+            player.transform.position = new Vector2(0.42f, -2.1f);
+            playerMovement.SetDirection(3);
+        }
+    }
 }
