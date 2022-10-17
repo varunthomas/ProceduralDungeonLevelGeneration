@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class MovementEvents : MonoBehaviour
+{
+	public int x = 0;
+	public int y = 0;	
+	    Animator anim;
+    AnimatorClipInfo[] m_CurrentClipInfo;
+    string m_ClipName;
+	
+	public void PressAndHoldUp()
+         {
+             Debug.Log("Press and hold");
+			 x = 0;
+			 y = 1;
+         }
+	public void PressAndHoldComplete()
+         {
+             Debug.Log("Press and hold done");
+			 x = 0;
+			 y = 0;
+         }
+		 
+	public void PressAndHoldDown()
+         {
+             Debug.Log("Press and hold");
+			 x = 0;
+			 y = -1;
+         }
+
+	public void PressAndHoldLeft()
+         {
+             Debug.Log("Press and hold");
+			 x = -1;
+			 y = 0;
+         }
+
+	public void PressAndHoldRight()
+         {
+             Debug.Log("Press and hold");
+			 x = 1;
+			 y = 0;
+         }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag ("Player");
+        anim = player.GetComponent<Animator>();		
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+	
+    public void onHitButtonPress()
+    {
+        Debug.Log("Triggered hit");
+        StartCoroutine(AttackCo());
+        //anim.SetBool("Hit", false);
+        //m_CurrentClipInfo = this.anim.GetCurrentAnimatorClipInfo(0);
+        //m_ClipName = m_CurrentClipInfo[0].clip.name;
+        //Debug.Log("current anim is " + m_ClipName);
+    }
+
+    private IEnumerator AttackCo()
+    {
+        anim.SetBool("Hit", true);
+        yield return null;
+        anim.SetBool("Hit", false);
+        yield return new WaitForSeconds(.33f);
+    }
+	
+}

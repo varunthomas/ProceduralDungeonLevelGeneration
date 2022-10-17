@@ -67,27 +67,7 @@ public class PlayerMovement : MonoBehaviour
 			movement.x = -1;
 			animator.SetBool("Init", false);
 		}
-		else
-		{
-			movement.x = 0;
-		}
-		
-		if (moveEvent.y == 1)
-		{
-			animator.SetBool("Init", false);
-			movement.y = 1;
-		}
-		else if (moveEvent.y == -1)
-		{
-			animator.SetBool("Init", false);
-			movement.y = -1;
-		}
-		else
-		{
-			movement.y = 0;
-		}
-		
-		/*if (joystick.Horizontal > .2f)
+		if (joystick.Horizontal > .2f)
 		{
 			animator.SetBool("Init", false);
 			movement.x = 1;
@@ -115,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 		else
 		{
 			movement.y = 0;
-		}*/
+		}
 		
 		animator.SetFloat("Horizontal", movement.x);
 		animator.SetFloat("Vertical", movement.y);

@@ -125,7 +125,16 @@ MonoBehaviour:
   rb: {fileID: 222479883672773502}
   animator: {fileID: 222479883672773440}
   joystick: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  clip:
+  - {fileID: 7400000, guid: e5ec29448dab113408888ad20d53ac4b, type: 2}
+  - {fileID: 7400000, guid: 565490c655d18894383eca5978a8ba37, type: 2}
+  - {fileID: 7400000, guid: 881e5414a44b5bf41b6ce03fea08cb6e, type: 2}
+  - {fileID: 7400000, guid: af9baad0133329947a069395aee43494, type: 2}
+  animatorOverrideController:
+  - {fileID: 22100000, guid: 4c204c39edff0b6488460e3d71137d1f, type: 2}
+  - {fileID: 22100000, guid: a4252a98b72c82e40b564a66b9362ed0, type: 2}
+  - {fileID: 22100000, guid: 7b242afc00453484cbddf8f524446146, type: 2}
+  - {fileID: 22100000, guid: b4cff4033e9e7914887dfb55d313cf85, type: 2}
 --- !u!95 &222479883672773440
 Animator:
   serializedVersion: 4
@@ -134,7 +143,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222479883672773442}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ca75ce43dc7a0964f8cd8ff64e48c6d1, type: 2}
   m_CullingMode: 0
