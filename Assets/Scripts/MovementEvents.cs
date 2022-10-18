@@ -13,34 +13,29 @@ public class MovementEvents : MonoBehaviour
 	
 	public void PressAndHoldUp()
          {
-             Debug.Log("Press and hold");
 			 x = 0;
 			 y = 1;
          }
 	public void PressAndHoldComplete()
          {
-             Debug.Log("Press and hold done");
 			 x = 0;
 			 y = 0;
          }
 		 
 	public void PressAndHoldDown()
          {
-             Debug.Log("Press and hold");
 			 x = 0;
 			 y = -1;
          }
 
 	public void PressAndHoldLeft()
          {
-             Debug.Log("Press and hold");
 			 x = -1;
 			 y = 0;
          }
 
 	public void PressAndHoldRight()
          {
-             Debug.Log("Press and hold");
 			 x = 1;
 			 y = 0;
          }
@@ -60,12 +55,7 @@ public class MovementEvents : MonoBehaviour
 	
     public void onHitButtonPress()
     {
-        Debug.Log("Triggered hit");
         StartCoroutine(AttackCo());
-        //anim.SetBool("Hit", false);
-        //m_CurrentClipInfo = this.anim.GetCurrentAnimatorClipInfo(0);
-        //m_ClipName = m_CurrentClipInfo[0].clip.name;
-        //Debug.Log("current anim is " + m_ClipName);
     }
 
     private IEnumerator AttackCo()

@@ -13,12 +13,9 @@ public class PlayerMovement : MonoBehaviour
 	public Rigidbody2D rb;
 	public Animator animator;
 	Vector2 movement;
-	public Joystick joystick;
 	public MovementEvents moveEvent;
 
 	public AnimationClip[] clip;
-
-	//protected AnimatorOverrideController animatorOverrideController;
 	
 
 	int dir;
@@ -26,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		dir = GetDirection();
-		Debug.Log("Dir is " + dir);
 
 		var animatorOverrideController = (AnimatorController)animator.runtimeAnimatorController;
 		var state = animatorOverrideController.layers[0].stateMachine.states.FirstOrDefault(s => s.state.name.Equals("Default")).state;
@@ -37,19 +33,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Setting new anim");
 			animatorOverrideController.SetStateEffectiveMotion(state, clip[dir]);
 		}
-		
-		//animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        //animator.runtimeAnimatorController = animatorOverrideController;
-		//animatorOverrideController["Default"] = clip[dir];
-		//if(animator.GetCurrentAnimatorStateInfo(0).IsName("Default"))
-		//{
-		//	animator.GetCurrentAnimatorStateInfo(0)
-		//}
-		Debug.Log("Dir is " + dir + " clip is ");// + animatorOverrideController["Player"].name);
-		//default_motion = animator.GetCurrentAnimatorStateInfo(0).motion;
 
 	}
     // Update is called once per frame
@@ -87,36 +72,6 @@ public class PlayerMovement : MonoBehaviour
 			movement.y = 0;
 		}
 		
-		/*if (joystick.Horizontal > .2f)
-		{
-			animator.SetBool("Init", false);
-			movement.x = 1;
-		}
-		else if (joystick.Horizontal <= -.2f)
-		{
-			movement.x = -1;
-			animator.SetBool("Init", false);
-		}
-		else
-		{
-			movement.x = 0;
-		}
-
-		if (joystick.Vertical > .2f)
-		{
-			animator.SetBool("Init", false);
-			movement.y = 1;
-		}
-		else if (joystick.Vertical <= -.2f)
-		{
-			animator.SetBool("Init", false);
-			movement.y = -1;
-		}
-		else
-		{
-			movement.y = 0;
-		}*/
-		
 		animator.SetFloat("Horizontal", movement.x);
 		animator.SetFloat("Vertical", movement.y);
 		if(movement.x == 0 && movement.y == 0)
@@ -131,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 		animator.SetFloat("Speed", movement.sqrMagnitude);
 		animator.SetInteger("Direction", dir);
-		//Debug.Log(movement.x + " " + movement.y);
-
     }
 	
 	void FixedUpdate()
