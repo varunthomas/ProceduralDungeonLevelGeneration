@@ -1,18 +1,90 @@
-
+using System.Collections.Generic;
 using UnityEngine;
 public class Room
 {
 
     public int room_num;
     int entryPoint;
+    List<float[]> obstMap = new List<float[]>(); //List of coordinates(x,y)
     public bool[] NeighbourList = new bool[4];
     public Room[] NeighbourRoom = new Room[4];
+    
 
     public Room(int n)
     {
         room_num = n;
     }
 
+    public void AddObstacle(float x, float y, int i)
+    {
+
+        float[] obstacleCoord = new float[2];
+        Debug.Log("Calling add neighbour for room " + room_num);
+        if(isRockOverlapping(x,y) || isEntranceOverlapping(x,y))
+        {
+            return;
+        }
+
+        obstacleCoord[0] = x;
+        obstacleCoord[1] = y;
+        Debug.Log("Adding obst x: " + obstacleCoord[0] + " y: " +obstacleCoord[1]);
+        obstMap.Add(obstacleCoord);
+    }
+
+    //Check if the coordinates of the new rock overlaps with any existing rocks.
+    bool isRockOverlapping(float x, float y)
+    {
+        for(int j = 0; j < obstMap.Count; j++)
+        {
+            if((obstMap[j][0] <= x && x <= obstMap[j][0] + 0.9077368f) || (x <= obstMap[j][0] && obstMap[j][0] <= x + 0.9077368f))
+            {
+                //dont add
+                return true;
+            }
+            if((obstMap[j][1] <= y && y <= obstMap[j][1] + 0.8923962f) || (y <= obstMap[j][1] && obstMap[j][1] <= y + 0.8923962f))
+            {
+                //dont add
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    bool isEntranceOverlapping(float x, float y)
+    {
+        //Check if Rock is at North entrance
+        if((y >= 1.97f && y <= 3.04f) && (x >= 0f && x <= 1f))
+        {
+            Debug.Log("overlapping player N " + x  + " " + y + " roomnum " + room_num);
+            return true;
+        }
+       //Check if Rock is at South entrance
+        if((y >= -3.0f && y <= -1.97f) && (x >= -1.16f && x <= -0.28f))
+        {
+            Debug.Log("overlapping player S  " + x  + " " + y + " roomnum " + room_num);
+            return true;
+        }
+        //Check if Rock is at East entrance
+        if((y >= -0.17f && y <= 1.23f) && (x >= -9.93f && x <= -8.85f))
+        {
+            Debug.Log("overlapping player E " + x  + " " + y + " roomnum " + room_num);
+            return true;
+        }
+        //Check if Rock is at West entrance
+        if((y >= -0.28f && y <= 1.12f) && (x >= 8.86f && x <= 10f))
+        {
+            Debug.Log("overlapping player W  " + x  + " " + y + " roomnum " + room_num);
+            return true;
+        }
+        
+        return false;
+
+    }
+    public List<float[]> getObstacleCoord()
+    {
+        return  obstMap;
+    }
     public string getPrefabName()
     {
         string prefabName = "Room_";

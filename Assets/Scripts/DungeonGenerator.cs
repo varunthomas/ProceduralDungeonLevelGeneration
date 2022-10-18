@@ -10,6 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     int num_rooms = 10;
     int room_num = 1;
     string prefabName;
+    List<float[]> obstacleCoord = new List<float[]>();
 
 	void Awake()
 	{
@@ -31,6 +32,14 @@ public class DungeonGenerator : MonoBehaviour
             int entryPoint;
             entryPoint = instance.currentRoom.GetEntryPoint();
             instance.currentRoom.SetPlayerPos(entryPoint);
+
+            //numObst = instance.currentRoom.getNumObst();
+            obstacleCoord = instance.currentRoom.getObstacleCoord();
+            Debug.Log("obst count is " + obstacleCoord.Count);
+            for(int i=0;i<obstacleCoord.Count;i++)
+            {
+                Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
+            }
             //instance.currentRoom is called, otherwise currentRoom will be null here. Everytime we use member variables in else case, ie when instance is set, we need to access it through that instance
             prefabName = instance.currentRoom.getPrefabName();
             GameObject roomObject = (GameObject) Instantiate (Resources.Load (prefabName));
@@ -46,6 +55,13 @@ public class DungeonGenerator : MonoBehaviour
     {
         Debug.Log("Start func");
         prefabName = currentRoom.getPrefabName();
+        obstacleCoord = instance.currentRoom.getObstacleCoord();
+        for(int i=0;i<obstacleCoord.Count;i++)
+        {
+            Debug.Log("x " + obstacleCoord[i][0]);
+            Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
+        }
+
         GameObject roomObject = (GameObject) Instantiate (Resources.Load (prefabName));
         roomObject.transform.SetParent(gridObject.transform);
     }
@@ -56,8 +72,13 @@ public class DungeonGenerator : MonoBehaviour
         float rand_val;
         int rand_dir_index = 0;
         Room room;
-       
         Room firstRoom = new Room(room_num);
+        int numObst;
+        numObst = Random.Range(1,11);
+        for(int i = 0; i< numObst; i++)
+        {
+            firstRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f), i);
+        }
         room_num++;
         roomsToCreate.Enqueue(firstRoom);
         num_rooms--;
@@ -94,6 +115,13 @@ public class DungeonGenerator : MonoBehaviour
     void AddNeighbour(int neigh_index, Room room, Queue<Room> roomsToCreate)
     {
         Room neighRoom = new Room(room_num);
+        int numObst;
+        numObst = Random.Range(1,11);
+        for(int i = 0; i< numObst; i++)
+        {
+            neighRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f), i);
+        }
+        
         room_num++;
         if(neigh_index == 0)
         {
