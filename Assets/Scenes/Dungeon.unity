@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 1235354474, guid: 810f5a507ad2ab8469b06c006c537d68, type: 3}
     - target: {fileID: 222479883672773501, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 222479883672773503, guid: 7c5e9bb6aff4ca1408a276b987605675, type: 3}
       propertyPath: joystick

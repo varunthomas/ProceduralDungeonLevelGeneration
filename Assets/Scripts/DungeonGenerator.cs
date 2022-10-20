@@ -33,12 +33,18 @@ public class DungeonGenerator : MonoBehaviour
             entryPoint = instance.currentRoom.GetEntryPoint();
             instance.currentRoom.SetPlayerPos(entryPoint);
 
-            //numObst = instance.currentRoom.getNumObst();
             obstacleCoord = instance.currentRoom.getObstacleCoord();
+            Obstacle obstacle;
             Debug.Log("obst count is " + obstacleCoord.Count);
             for(int i=0;i<obstacleCoord.Count;i++)
             {
-                Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
+                obstacle = instance.currentRoom.FindObstInstance(new float[] {obstacleCoord[i][0], obstacleCoord[i][1]});
+                if(obstacle == null)
+                {
+                    Debug.Log("Could not find obstacle in instantiate");
+                }
+                if(!obstacle.isDestroyed)
+                    Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
             }
             //instance.currentRoom is called, otherwise currentRoom will be null here. Everytime we use member variables in else case, ie when instance is set, we need to access it through that instance
             prefabName = instance.currentRoom.getPrefabName();
@@ -55,11 +61,17 @@ public class DungeonGenerator : MonoBehaviour
     {
         Debug.Log("Start func");
         prefabName = currentRoom.getPrefabName();
-        obstacleCoord = instance.currentRoom.getObstacleCoord();
+        obstacleCoord = currentRoom.getObstacleCoord();
+        Obstacle obstacle;
         for(int i=0;i<obstacleCoord.Count;i++)
         {
-            Debug.Log("x " + obstacleCoord[i][0]);
-            Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
+            obstacle = currentRoom.FindObstInstance(new float[] {obstacleCoord[i][0], obstacleCoord[i][1]});
+            if(obstacle == null)
+            {
+                    Debug.Log("Could not find obstacle in instantiate");
+            }
+            if(!obstacle.isDestroyed)
+                Instantiate(Resources.Load("Rock"), new Vector2(obstacleCoord[i][0], obstacleCoord[i][1]), Quaternion.identity);
         }
 
         GameObject roomObject = (GameObject) Instantiate (Resources.Load (prefabName));
@@ -77,7 +89,7 @@ public class DungeonGenerator : MonoBehaviour
         numObst = Random.Range(1,11);
         for(int i = 0; i< numObst; i++)
         {
-            firstRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f), i);
+            firstRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f));
         }
         room_num++;
         roomsToCreate.Enqueue(firstRoom);
@@ -119,7 +131,7 @@ public class DungeonGenerator : MonoBehaviour
         numObst = Random.Range(1,11);
         for(int i = 0; i< numObst; i++)
         {
-            neighRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f), i);
+            neighRoom.AddObstacle(Random.Range(-7.76f, 11.16f), Random.Range(-1.81f, 3.14f));
         }
         
         room_num++;

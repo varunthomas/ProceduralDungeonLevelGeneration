@@ -8,6 +8,9 @@ public class Room
     List<float[]> obstMap = new List<float[]>(); //List of coordinates(x,y)
     public bool[] NeighbourList = new bool[4];
     public Room[] NeighbourRoom = new Room[4];
+    List<Obstacle> obstList = new List<Obstacle>();
+
+
     
 
     public Room(int n)
@@ -15,16 +18,17 @@ public class Room
         room_num = n;
     }
 
-    public void AddObstacle(float x, float y, int i)
-    {
-
-        float[] obstacleCoord = new float[2];
+    public void AddObstacle(float x, float y)
+    {    
         Debug.Log("Calling add neighbour for room " + room_num);
         if(isRockOverlapping(x,y) || isEntranceOverlapping(x,y))
         {
             return;
         }
 
+        float[] obstacleCoord = new float[2];
+        Obstacle obstacle = new Obstacle("Rock", x, y); 
+        AddObstacleInstance(obstacle);
         obstacleCoord[0] = x;
         obstacleCoord[1] = y;
         Debug.Log("Adding obst x: " + obstacleCoord[0] + " y: " +obstacleCoord[1]);
@@ -174,5 +178,22 @@ public class Room
             player.transform.position = new Vector2(0.42f, -2.1f);
             playerMovement.SetDirection(3);
         }
+    }
+
+    void AddObstacleInstance(Obstacle obstacle)
+    {
+        obstList.Add(obstacle);
+    }
+
+    public Obstacle FindObstInstance(float[] coordList)
+    {
+        foreach(Obstacle obs in obstList)
+        {
+            if(obs.IsObstacleFound(coordList))
+            {
+                return obs;
+            }
+        }
+        return null;
     }
 }
