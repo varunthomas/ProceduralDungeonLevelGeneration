@@ -15,6 +15,7 @@ public enum PlayerState
 public class PlayerMovement : MonoBehaviour
 {
 	public PlayerState currentState;
+	public int health;
 	public float moveSpeed = 5f;
 	    AnimatorClipInfo[] m_CurrentClipInfo;
     string m_ClipName;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 	public Animator animator;
 	Vector2 movement;
 	public MovementEvents moveEvent;
+	HealthBar healthBar;
 
 	public AnimationClip[] clip;
 	
@@ -30,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
+		
+		GameObject healthBarObj = GameObject.FindGameObjectWithTag ("HealthBar");
+		healthBar = healthBarObj.GetComponent<HealthBar> ();
+		healthBar.SetHealth(health);
 		currentState = PlayerState.Walk;
 		dir = GetDirection();
 
@@ -127,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
 
 	IEnumerator KnockCo(float knockbackTime)
     {
+		health--;
+		healthBar.SetHealth(health);
         yield return new WaitForSeconds(knockbackTime);
         rb.velocity = Vector2.zero;
 		currentState = PlayerState.Walk;

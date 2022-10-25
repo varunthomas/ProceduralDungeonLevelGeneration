@@ -12,6 +12,7 @@ TagManager:
   - HBUp
   - HBRight
   - HBLeft
+  - HealthBar
   layers:
   - Default
   - TransparentFX

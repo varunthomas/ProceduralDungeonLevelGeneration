@@ -128,10 +128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  health: 3
   moveSpeed: 5
   rb: {fileID: 222479883672773502}
   animator: {fileID: 222479883672773440}
   moveEvent: {fileID: 0}
+  healthBar: {fileID: 0}
   clip:
   - {fileID: 7400000, guid: e5ec29448dab113408888ad20d53ac4b, type: 2}
   - {fileID: 7400000, guid: 565490c655d18894383eca5978a8ba37, type: 2}
