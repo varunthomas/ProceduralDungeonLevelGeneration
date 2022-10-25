@@ -155,7 +155,7 @@ MonoBehaviour:
   currentState: 0
   target: {fileID: 0}
   chaseRadius: 6
-  attackRadius: 2
+  attackRadius: 1
 --- !u!114 &3113377575904025264
 MonoBehaviour:
   m_ObjectHideFlags: 0

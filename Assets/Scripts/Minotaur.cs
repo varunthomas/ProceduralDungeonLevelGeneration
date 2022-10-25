@@ -36,8 +36,16 @@ public class Minotaur : Enemy
 
     void TriggerEnemyAction()
     {
-        // Move to player
-        if(Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
+        
+        /*if(health <= 0)
+        {
+            if(currentState != EnemyState.Dead)
+            {
+                Debug.Log("Enemy died");
+                StartCoroutine(DeathCo());
+            }
+        }
+        else */if(Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius) // Move to player
         {
             if(currentState == EnemyState.Idle || currentState == EnemyState.Walk)
             {
@@ -46,6 +54,7 @@ public class Minotaur : Enemy
                 
                 minotaurRB.MovePosition(temp);
                 anim.SetBool("Seen", true);
+                //anim.SetTrigger("Seen");
                 if(target.position.x < transform.position.x )
                 {
                     anim.SetFloat("MoveX", -1);
@@ -59,21 +68,22 @@ public class Minotaur : Enemy
         }
         else if(Vector3.Distance(target.position, transform.position) <= attackRadius) //Attack player
         {
-            if(currentState != EnemyState.Attack)
+            //anim.SetBool("Seen", false);
+            if(currentState != EnemyState.Attack && currentState != EnemyState.Dead)
             {
-            StartCoroutine(AttackCo());
-            Debug.Log("In attacking range");
+                StartCoroutine(AttackCo());
+                Debug.Log("In attacking range");
 		    
 
-            if(player.GetComponent<PlayerMovement>().currentState != PlayerState.Stagger)
-            {
-                Vector2 difference = target.position - transform.position;
-                difference = difference.normalized * 4f;
-                hitRb.AddForce(difference, ForceMode2D.Impulse);
-                hitRb.GetComponent<PlayerMovement>().currentState = PlayerState.Stagger;
-                player.GetComponent<PlayerMovement>().Knock(0.4f);
-                Debug.Log("Collider is player force is " + difference);
-            }
+                if(player.GetComponent<PlayerMovement>().currentState != PlayerState.Stagger)
+                {
+                    Vector2 difference = target.position - transform.position;
+                    difference = difference.normalized * 4f;
+                    hitRb.AddForce(difference, ForceMode2D.Impulse);
+                    hitRb.GetComponent<PlayerMovement>().currentState = PlayerState.Stagger;
+                    player.GetComponent<PlayerMovement>().Knock(0.4f);
+                    Debug.Log("Collider is player force is " + difference);
+                }
             }
             
         }
@@ -95,6 +105,20 @@ public class Minotaur : Enemy
             ChangeState(EnemyState.Walk);
             Debug.Log("End attack anim");
             
+    }
+
+    public void TriggerDeath()
+    {
+        Debug.Log("Triggering death");
+        StartCoroutine(DeathCo());
+    }
+    IEnumerator DeathCo()
+    {
+        ChangeState(EnemyState.Dead);
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Dead");
+        gameObject.SetActive(false);
     }
     void ChangeState(EnemyState newState)
     {

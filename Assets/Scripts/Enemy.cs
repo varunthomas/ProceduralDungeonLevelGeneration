@@ -7,7 +7,8 @@ public enum EnemyState
     Idle,
     Attack,
     Walk,
-    Stagger
+    Stagger,
+    Dead
 }
 public class Enemy : MonoBehaviour
 {
@@ -45,4 +46,6 @@ public class Enemy : MonoBehaviour
         }*/
         //enemyRB.isKinematic = true;
     }
+
+    
 }
