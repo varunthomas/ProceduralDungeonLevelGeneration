@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 222479883672773503}
   - component: {fileID: 222479883672773440}
   - component: {fileID: 222479883672773441}
+  - component: {fileID: 6715118369527022981}
+  - component: {fileID: 3024631926346637229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -125,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5605ebff29de06d4e89ccc16899e9dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   moveSpeed: 5
   rb: {fileID: 222479883672773502}
   animator: {fileID: 222479883672773440}
@@ -180,6 +183,44 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.999979, y: 0.46736217}
   m_EdgeRadius: 0
+--- !u!114 &6715118369527022981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222479883672773442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0ce6933b317ca419f8f72b3514de31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &3024631926346637229
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222479883672773442}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0078110695, y: 0.013018608}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.875, y: 1.1875}
+    newSize: {x: 0.875, y: 1.1875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5469303, y: 0.90109015}
+  m_EdgeRadius: 0
 --- !u!1 &1693683634462577221
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,10 +231,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8849398637224561760}
   - component: {fileID: 2539588052112578259}
-  - component: {fileID: 6735306887408851370}
+  - component: {fileID: 4899883032174694316}
   m_Layer: 0
   m_Name: HitBoxDown
-  m_TagString: Untagged
+  m_TagString: HBDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +280,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8921008, y: 0.5749762}
   m_EdgeRadius: 0
---- !u!114 &6735306887408851370
+--- !u!114 &4899883032174694316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,9 +289,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1693683634462577221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0ce6933b317ca419f8f72b3514de31, type: 3}
+  m_Script: {fileID: 11500000, guid: eb400d62bf1f3084babe526338b594a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 4
+  knockbackTime: 0.4
 --- !u!1 &2920303010380581800
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,10 +304,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8858395628281012548}
   - component: {fileID: 5694614003123054400}
-  - component: {fileID: 2447666751162201575}
+  - component: {fileID: 1762792157379303936}
   m_Layer: 0
   m_Name: HitBoxRight
-  m_TagString: Untagged
+  m_TagString: HBRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +353,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.31407356, y: 0.9863651}
   m_EdgeRadius: 0
---- !u!114 &2447666751162201575
+--- !u!114 &1762792157379303936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,9 +362,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2920303010380581800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0ce6933b317ca419f8f72b3514de31, type: 3}
+  m_Script: {fileID: 11500000, guid: eb400d62bf1f3084babe526338b594a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 4
+  knockbackTime: 0.4
 --- !u!1 &4901160435889027992
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,10 +377,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4285780330596222912}
   - component: {fileID: 699182298379818445}
-  - component: {fileID: 9179861339338891087}
+  - component: {fileID: 6004593871617830521}
   m_Layer: 0
   m_Name: HitBoxLeft
-  m_TagString: Untagged
+  m_TagString: HBLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -381,7 +426,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32448864, y: 0.9342904}
   m_EdgeRadius: 0
---- !u!114 &9179861339338891087
+--- !u!114 &6004593871617830521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,9 +435,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4901160435889027992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0ce6933b317ca419f8f72b3514de31, type: 3}
+  m_Script: {fileID: 11500000, guid: eb400d62bf1f3084babe526338b594a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 4
+  knockbackTime: 0.4
 --- !u!1 &8527508317130812169
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,10 +450,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7552652212599906834}
   - component: {fileID: 4347994446866711625}
-  - component: {fileID: 5216429894449960341}
+  - component: {fileID: 8524641906185655466}
   m_Layer: 0
   m_Name: HitBoxUp
-  m_TagString: Untagged
+  m_TagString: HBUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,7 +499,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.162889, y: 0.4447899}
   m_EdgeRadius: 0
---- !u!114 &5216429894449960341
+--- !u!114 &8524641906185655466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,6 +508,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8527508317130812169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0ce6933b317ca419f8f72b3514de31, type: 3}
+  m_Script: {fileID: 11500000, guid: eb400d62bf1f3084babe526338b594a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 4
+  knockbackTime: 0.4

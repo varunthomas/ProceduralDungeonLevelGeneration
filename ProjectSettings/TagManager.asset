@@ -7,6 +7,11 @@ TagManager:
   - DungeonDoor
   - Dungeon
   - Rock
+  - Enemy
+  - HBDown
+  - HBUp
+  - HBRight
+  - HBLeft
   layers:
   - Default
   - TransparentFX

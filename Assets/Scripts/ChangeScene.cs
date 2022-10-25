@@ -28,7 +28,7 @@ public class ChangeScene : MonoBehaviour
 			
 			LoadNextLevel();
 		}
-		else if(collider.gameObject.tag == "Player")
+		else if(collider.gameObject.tag == "Player" && !collider.isTrigger)
 		{
 			FreezePlayer();
 			LoadNextLevel();

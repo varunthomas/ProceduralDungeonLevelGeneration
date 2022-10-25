@@ -8,6 +8,8 @@ public class MovementEvents : MonoBehaviour
 	public int x = 0;
 	public int y = 0;	
 	    Animator anim;
+
+        PlayerState pm;
     AnimatorClipInfo[] m_CurrentClipInfo;
     string m_ClipName;
 	
@@ -44,6 +46,7 @@ public class MovementEvents : MonoBehaviour
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag ("Player");
+        pm = player.GetComponent<PlayerMovement>().currentState;
         anim = player.GetComponent<Animator>();		
     }
 
@@ -55,15 +58,21 @@ public class MovementEvents : MonoBehaviour
 	
     public void onHitButtonPress()
     {
-        StartCoroutine(AttackCo());
+        if (pm != PlayerState.Attack && pm != PlayerState.Stagger)
+        {
+            Debug.Log("Hit pressed");
+            StartCoroutine(AttackCo());
+        }
     }
 
     private IEnumerator AttackCo()
     {
         anim.SetBool("Hit", true);
+        pm = PlayerState.Attack;
         yield return null;
         anim.SetBool("Hit", false);
         yield return new WaitForSeconds(.33f);
+        pm = PlayerState.Walk;
     }
 	
 }

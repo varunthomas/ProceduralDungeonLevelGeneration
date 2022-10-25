@@ -5,8 +5,16 @@ using UnityEditor;
 using UnityEditor.Animations;
 using System.Linq;
 
+public enum PlayerState
+{
+	Walk,
+	Idle,
+	Attack,
+	Stagger
+}
 public class PlayerMovement : MonoBehaviour
 {
+	public PlayerState currentState;
 	public float moveSpeed = 5f;
 	    AnimatorClipInfo[] m_CurrentClipInfo;
     string m_ClipName;
@@ -22,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
+		currentState = PlayerState.Walk;
 		dir = GetDirection();
 
 		var animatorOverrideController = (AnimatorController)animator.runtimeAnimatorController;
@@ -41,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+		/*if(currentState == PlayerState.Stagger)
+		{
+			Debug.Log("Player staggered");
+		}*/
+		if(currentState == PlayerState.Walk)
+		{
 		if(moveEvent.x == 1)
 		{
 			animator.SetBool("Init", false);
@@ -86,11 +101,13 @@ public class PlayerMovement : MonoBehaviour
 		}
 		animator.SetFloat("Speed", movement.sqrMagnitude);
 		animator.SetInteger("Direction", dir);
+		}
     }
 	
 	void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		if(currentState == PlayerState.Walk)
+			rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 	}
 
 	public void SetDirection(int d)
@@ -102,4 +119,24 @@ public class PlayerMovement : MonoBehaviour
 	{
 		return dir;
 	}
+
+	public void Knock(float knockbackTime)
+	{
+		StartCoroutine(KnockCo(knockbackTime));
+	}
+
+	IEnumerator KnockCo(float knockbackTime)
+    {
+        yield return new WaitForSeconds(knockbackTime);
+        rb.velocity = Vector2.zero;
+		currentState = PlayerState.Walk;
+        //Debug.Log("Collider is " + collider.name);
+        //Debug.Log("player knocked");
+        /*if(collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy tag detected");
+            enemyRB.GetComponent<Enemy>().currentState = EnemyState.Idle;
+        }*/
+        //enemyRB.isKinematic = true;
+    }
 }
